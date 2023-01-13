@@ -116,22 +116,25 @@ pokemonList(i);
 
 
 //2 - Modal
-let allModal = document.getElementById("all-modal"); // Get the modal
-// let btn = document.getElementById((i)); // Get the button that opens the modal
-
-  
+  let allModal = document.getElementById("all-modal"); // Get the modal
   function openModal () {
     for (let i = 0; i < 13; i++) {
        
+      //card
+      let pokemonCard = document.createElement ("div");
+      pokemonCard.classList.add("pokemonCard");
+      pokemonCard.setAttribute("id",`myModal-${i}`);
+
       //content
       let myContent = document.createElement ("div");
       myContent.classList.add("myContent");
-      myContent.setAttribute("id",`mycontent-${i}`);
+      myContent.setAttribute("id",`myContent-${i}`);
 
-      //card
-      let pokemonCard = document.createElement ("div");
-       pokemonCard.classList.add("pokemonCard");
-       pokemonCard.setAttribute("id",`myModal-${i}`);
+       //span
+       let span = document.createElement("span");
+       span.classList.add("close");
+       span.setAttribute("id",`span-${i}`);
+       span.innerHTML = "X"
 
       //id
       let pokemonId = document.createElement ("div");
@@ -195,17 +198,20 @@ let allModal = document.getElementById("all-modal"); // Get the modal
       pokemonTotal.classList.add("pokemonTotal");
       pokemonTotal.innerHTML = 'Total:' + array.reduce((accumulator, currentValue) => accumulator + currentValue);
 
-      pokemonCard.appendChild(pokemonId);
-      pokemonCard.appendChild(pokemonImg);
-      pokemonCard.appendChild(pokemonName);
-      pokemonCard.appendChild(pokeType1);
-      pokemonCard.appendChild(pokeType2);
-      pokemonCard.appendChild(pokemonDesc);
-      pokemonCard.appendChild(DescContent);
-      pokemonCard.appendChild(pokemonStats);
-      pokemonCard.appendChild(statsContent);
-      pokemonCard.appendChild(pokemonTotal);
+      myContent.appendChild(pokemonId);
+      myContent.appendChild(pokemonImg);
+      myContent.appendChild(pokemonName);
+      myContent.appendChild(pokeType1);
+      myContent.appendChild(pokeType2);
+      myContent.appendChild(pokemonDesc);
+      myContent.appendChild(DescContent);
+      myContent.appendChild(pokemonStats);
+      myContent.appendChild(statsContent);
+      myContent.appendChild(pokemonTotal);
+      myContent.appendChild(span); 
 
+
+      pokemonCard.appendChild(myContent); 
       allModal.appendChild(pokemonCard); 
 
     }
@@ -213,24 +219,25 @@ let allModal = document.getElementById("all-modal"); // Get the modal
   openModal ()
 
   for (let i = 0; i < 13; i++) {
-    let pokemon = document.getElementById(i);
-    pokemon.addEventListener("click", function () {
+    let pokemon1 = document.getElementById(i);    
+    pokemon1.addEventListener("click", function () {
       document.getElementById(`myModal-${i}`).style.display = "block";
-      })
-      let span = document.getElementsByClassName("close")[0];// Get the <span> element that closes the moda
-      span.setAttribute("id",`span-${i}`);
+    })
+   }   
+      // let  = document.getElementsByClassName("close")[0];// Get the <span> element that closes the moda
+      let span = document.getElementById(`span-${i}`);
       span.addEventListener("click", function() {
-        document.getElementById(`span-${i}`).style.display = "none";
+      document.getElementsById(all-modal).style.display = "none";
       })
-      // span.onclick = function () { // When the user clicks on <span> (x), close the modal
-      // allModal.style.display = "none";
-      // }
+
+      
     window.onclick = function(event) { // When the user clicks anywhere outside of the modal, close it
-      if (event.target == allModal) {
-        allModal.style.display = "none";
-      }
+      if (event.target == all-modal) {
+        allModal.style.display = "none ";
+      
     }
   }
 
 
 
+ 
