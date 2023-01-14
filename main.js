@@ -1,73 +1,8 @@
 "use strict";
 import data from "./data.json" assert { type:"json"};
-// let id = data[i].id
-// console.log(id)
-// let name = data[i].name.english
-// let image = data[i].image.hires
 
+//All pokemon 
 
-// const pokemon = data[0];
-// console.log(pokemon)
-// const allPokemon = document.querySelector("#all-pokemon");  
-
-// function addPokemon() {
-//     allPokemon.innerHTML = "";  // Clear any existing Pokemon
-//     for (let i = 0; i < 12; i++) {
-//         const pokemon = data[i];
-//         // let pokemonImg = data[counter].image.hires;
-
-//         const li = document.createElement("li");
-//         let image = document.createElement("img");
-//         image.src = pokemon.image.hires;
-//         console.log(pokemon.image.hires)
-//         li.innerHTML = `
-//             <div>#00${pokemon.id}</div>
-//             <img src=${pokemon.image.hires}/>
-//             <div>${pokemon.name.english}</div>
-//         `;   
-//         // li.className = pokemon.id; 
-//         allPokemon.appendChild(li);
-//     }
-// }
-
-// addPokemon();
-
-//1
-// const allPokemon = document.getElementById("all-pokemon");  
-// function addPokemon() {
-//     for (let i = 0; i < 12; i++) {
-        
-//         let pokemonDiv = document.createElement ("div");
-//         pokemonDiv.classList.add("pokemonDiv");
-
-//         let pokemonId = document.createElement ("div");
-//         pokemonId.classList.add("pokemonId"); 
-
-//         let pokemonImg = document.createElement ("img");
-//         pokemonImg.classList.add("pokemonImg");
-//         pokemonImg.src = data[i].image.hires;
-
-//         let pokemonName = document.createElement ("div");
-//         pokemonName.classList.add("pokemonName");
-//         pokemonName.innerHTML = data[i].name.english;
-        
-        
-//         if(data[i].id<10) pokemonId.innerHTML = "#00" + data[i].id;
-//         else if(data[i].id<100) pokemonId.innerHTML = "#0" + data[i].id;
-//         else ;
-
-//         pokemonDiv.appendChild(pokemonId);
-//         pokemonDiv.appendChild(pokemonImg);
-//         pokemonDiv.appendChild(pokemonName);
-        
-//         allPokemon.appendChild(pokemonDiv)
-
-//     }
-// }
-
-// addPokemon();
-
-//load more
 let i = 0
 const allPokemon = document.getElementById("all-pokemon");  
 function pokemonList (startIndex) {
@@ -88,7 +23,6 @@ function pokemonList (startIndex) {
         pokemonName.classList.add("pokemonName");
         pokemonName.innerHTML = data[i].name.english;
         
-        
         if(data[i].id<10) {
           pokemonId.innerHTML = "#00" + data[i].id 
         } else if(data[i].id<100) {
@@ -106,6 +40,7 @@ function pokemonList (startIndex) {
 
 pokemonList(i);
 
+//load more
 // let button = document.querySelector('load-more')
 // button.addEventListener('click',(event)=> {
 // event.preventDefault();
@@ -118,126 +53,157 @@ pokemonList(i);
 //2 - Modal
   let allModal = document.getElementById("all-modal"); // Get the modal
   function openModal () {
-    for (let i = 0; i < 13; i++) {
+    for (let i = 0; i < 12; i++) {
        
       //card
-      let pokemonCard = document.createElement ("div");
-      pokemonCard.classList.add("pokemonCard");
-      pokemonCard.setAttribute("id",`myModal-${i}`);
+      let pokemonCardC = document.createElement ("div");
+      pokemonCardC.classList.add("pokemonCardC");
+      pokemonCardC.setAttribute("id",`myModal-${i}`);
 
       //content
-      let myContent = document.createElement ("div");
-      myContent.classList.add("myContent");
-      myContent.setAttribute("id",`myContent-${i}`);
+      let myContentC = document.createElement ("div");
+      myContentC.classList.add("myContentC");
+      myContentC.setAttribute("id",`myContent-${i}`);
+
+      //Left content div
+      let leftContentC = document.createElement ("div");
+      leftContentC.classList.add("leftContentC");
+
+      //id
+      let pokemonIdC = document.createElement ("div");
+      pokemonIdC.classList.add("pokemonIdC"); 
+      if(data[i].id<10) {
+        pokemonIdC.innerHTML = "#00" + data[i].id 
+      } else if(data[i].id<100) {
+        pokemonIdC.innerHTML = "#0" + data[i].id; 
+      } else 
+      pokemonIdC.innerHTML = "#" + data[i].id;
+
+      //img
+      let pokemonImgC = document.createElement ("img");
+      pokemonImgC.classList.add("pokemonImgC");
+      pokemonImgC.src = data[i].image.hires;
+
+      //name
+      let pokemonNameC = document.createElement ("div");
+      pokemonNameC.classList.add("pokemonNameC");
+      pokemonNameC.innerHTML = data[i].name.english;
+
+      //Types
+      let pokeType1Father = document.createElement ("div");
+      pokeType1Father.classList.add("pokeType1Father");
+      
+      let pokeType1C = document.createElement ("button");
+      pokeType1C.className = "pokeType1C";
+      pokeType1C.innerHTML = data[i].type[0];
+
+      let pokeType2C = document.createElement ("button");
+      pokeType2C.classList.add("pokeType2C");
+        if (data[i].type[1] === "") {
+            let pokeType2C = ""
+        } else {
+          pokeType2C.innerHTML = data[i].type[1];
+      }
+
+      pokeType1Father.appendChild(pokeType1C);
+      pokeType1Father.appendChild(pokeType2C);
+
+      leftContentC.appendChild(pokemonIdC);
+      leftContentC.appendChild(pokemonImgC);
+      leftContentC.appendChild(pokemonNameC);
+      leftContentC.appendChild(pokeType1Father);
+
+      //right content div
+      let rightContentC = document.createElement ("div");
+      rightContentC.classList.add("rightContentC");
+
+      //All description
+      let allDescC = document.createElement ("div");
+      allDescC.classList.add("allDescC");
+
+      //description title
+      let pokemonDescC = document.createElement ("div");
+      pokemonDescC.classList.add("pokemonDescC");
+      pokemonDescC.innerHTML = 'Description' 
+
+      //description content
+      let DescContentC = document.createElement ("div");
+      DescContentC.classList.add("DescContentC");
+      DescContentC.innerHTML = data[i].description;
+
+      allDescC.appendChild(pokemonDescC)
+      allDescC.appendChild(DescContentC)
+
+      //All stats
+      let allStatsC = document.createElement ("div");
+      allStatsC.classList.add("allStatsC");
+
+      //stats title
+      let pokemonStatsC = document.createElement ("div");
+      pokemonStatsC.classList.add("pokemonStatsC");
+      pokemonStatsC.innerHTML = 'Stats'
+
+      //stats content
+      let statsContentLeftC = document.createElement ("div");
+      statsContentLeftC.classList.add("statsContentLeftC");
+      statsContentLeftC.innerHTML = (`HP: ${data[i].base.HP}<br> Attack: ${data[i].base.Attack}<br> Defense: ${data[i].base.Defense}`)
+
+      let statsContentmiddleC = document.createElement ("div");
+      statsContentmiddleC.classList.add("statsContentmiddleC");
+      statsContentmiddleC.innerHTML = (`Special Atk: ${data[i].base['Sp. Attack']}<br>  Special Def: ${data[i].base['Sp. Defense']}<br>  Speed: ${data[i].base['Speed']}`)
+
+      //Total amount - Stats content
+      let array = [data[i].base.HP, data[i].base.Attack, data[i].base.Defense, data[i].base["Sp. Attack"], data[i].base["Sp. Defense"], data[i].base.Speed]
+      let pokemonTotalrightC = document.createElement ("div");
+      pokemonTotalrightC.classList.add("pokemonTotalrightC");
+      pokemonTotalrightC.innerHTML = 'Total:' + array.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+      //stats row
+      let statsRow = document.createElement ("div");
+      statsRow.classList.add("statsRow");
+      statsRow.appendChild(statsContentLeftC);
+      statsRow.appendChild(statsContentmiddleC);
+      statsRow.appendChild(pokemonTotalrightC);
+      
+      allStatsC.appendChild(pokemonStatsC)
+      allStatsC.appendChild(statsRow)
+
+      rightContentC.appendChild(allDescC);
+      rightContentC.appendChild(allStatsC);
 
        //span
        let span = document.createElement("span");
-       span.classList.add("close");
+       span.className = "close";
        span.setAttribute("id",`span-${i}`);
        span.innerHTML = "X"
 
-      //id
-      let pokemonId = document.createElement ("div");
-      pokemonId.classList.add("pokemonId"); 
-      if(data[i].id<10) {
-        pokemonId.innerHTML = "#00" + data[i].id 
-      } else if(data[i].id<100) {
-        pokemonId.innerHTML = "#0" + data[i].id; 
-      } else 
-      pokemonId.innerHTML = "#" + data[i].id;
 
-      //img
-      let pokemonImg = document.createElement ("img");
-      pokemonImg.classList.add("pokemonImg");
-      pokemonImg.src = data[i].image.hires;
-
-      //name
-      let pokemonName = document.createElement ("div");
-      pokemonName.classList.add("pokemonName");
-      pokemonName.innerHTML = data[i].name.english;
-
-      //Types
-      let pokeType1 = document.createElement ("button");
-      pokeType1.classList.add("pokeType1");
-      pokeType1.innerHTML = data[i].type[0];
-
-      let pokeType2 = document.createElement ("button");
-      pokeType2.classList.add("pokeType2");
-        if (data[i].type[1] === "") {
-          pokeType2.innerHTML = "";
-        } else {
-         pokeType2.innerHTML = data[i].type[1];
-      }
-
-      //description title
-      let pokemonDesc = document.createElement ("div");
-      pokemonDesc.classList.add("pokemonDesc");
-      pokemonDesc.innerHTML = 'Description:' 
-
-      //description content
-      let DescContent = document.createElement ("div");
-      DescContent.classList.add("DescContent");
-      DescContent.innerHTML = data[i].description;
-
-      //stats title
-      let pokemonStats = document.createElement ("div");
-      pokemonStats.classList.add("pokemonStats");
-      pokemonStats.innerHTML = 'Stats:'
-      console.log(pokemonStats);
-
-      //stats
-      let statsContent = document.createElement ("div");
-      statsContent.classList.add("statsContent");
-      statsContent.innerHTML = JSON.stringify(data[i].base);
-      console.log(statsContent);
-
-      //Total amount
-      let array = [data[i].base.HP, data[i].base.Attack, data[i].base.Defense, data[i].base["Sp. Attack"], data[i].base["Sp. Defense"], data[i].base.Speed]
-      // console.log(array)
-      let pokemonTotal = document.createElement ("div");
-      pokemonTotal.classList.add("pokemonTotal");
-      pokemonTotal.innerHTML = 'Total:' + array.reduce((accumulator, currentValue) => accumulator + currentValue);
-
-      myContent.appendChild(pokemonId);
-      myContent.appendChild(pokemonImg);
-      myContent.appendChild(pokemonName);
-      myContent.appendChild(pokeType1);
-      myContent.appendChild(pokeType2);
-      myContent.appendChild(pokemonDesc);
-      myContent.appendChild(DescContent);
-      myContent.appendChild(pokemonStats);
-      myContent.appendChild(statsContent);
-      myContent.appendChild(pokemonTotal);
-      myContent.appendChild(span); 
-
-
-      pokemonCard.appendChild(myContent); 
-      allModal.appendChild(pokemonCard); 
+      myContentC.appendChild(span); 
+      myContentC.appendChild(leftContentC); 
+      myContentC.appendChild(rightContentC); 
+      pokemonCardC.appendChild(myContentC); 
+      allModal.appendChild(pokemonCardC); 
 
     }
   }
   openModal ()
 
-  for (let i = 0; i < 13; i++) {
+  for (let i = 0; i < 12; i++) {
     let pokemon1 = document.getElementById(i);    
     pokemon1.addEventListener("click", function () {
       document.getElementById(`myModal-${i}`).style.display = "block";
     })
-   }   
-      // let  = document.getElementsByClassName("close")[0];// Get the <span> element that closes the moda
+     
       let span = document.getElementById(`span-${i}`);
       span.addEventListener("click", function() {
-      document.getElementsById(all-modal).style.display = "none";
+      document.getElementById(`myModal-${i}`).style.display = "none";
       })
-
-      
-    window.onclick = function(event) { // When the user clicks anywhere outside of the modal, close it
-      if (event.target == all-modal) {
+ 
+    window.onclick = function(event) { 
+      if (event.target == "all-modal") {
         allModal.style.display = "none ";
       
+      }
     }
-  }
-
-
-
+}
  
