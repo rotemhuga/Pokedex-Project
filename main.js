@@ -1,6 +1,30 @@
 "use strict";
 import data from "./data.json" assert { type:"json"};
 
+//colors
+let typeColors = {
+
+	normal:   '#A8A77A',
+	fire:   '#EE8130',
+	water:   '#6390F0',
+	electric:   '#F7D02C',
+	grass:   '#7AC74C',
+	ice:   '#96D9D6',
+	fighting:   '#C22E28',
+	poison:   '#A33EA1',
+	ground:   '#E2BF65',
+	flying:   '#A98FF3',
+	psychic:   '#F95587',
+	bug:   '#A6B91A',
+	rock:   '#B6A136',
+	ghost:   '#735797',
+	dragon:   '#6F35FC',
+	dark:   '#705746',
+	steel:   '#B7B7CE',
+	fairy:   '#D685AD',
+
+};
+
 //All pokemon 
 
 let i = 0
@@ -17,7 +41,6 @@ function pokemonList (startIndex) {
         let pokemonImg = document.createElement ("img");
         pokemonImg.classList.add("pokemonImg");
         pokemonImg.src = data[i].image.hires;
-
 
         let pokemonName = document.createElement ("div");
         pokemonName.classList.add("pokemonName");
@@ -54,7 +77,7 @@ pokemonList(i);
   let allModal = document.getElementById("all-modal"); // Get the modal
   function openModal () {
     for (let i = 0; i < 12; i++) {
-       
+      
       //card
       let pokemonCardC = document.createElement ("div");
       pokemonCardC.classList.add("pokemonCardC");
@@ -93,20 +116,16 @@ pokemonList(i);
       let pokeType1Father = document.createElement ("div");
       pokeType1Father.classList.add("pokeType1Father");
       
-      let pokeType1C = document.createElement ("button");
-      pokeType1C.className = "pokeType1C";
-      pokeType1C.innerHTML = data[i].type[0];
-
-      let pokeType2C = document.createElement ("button");
-      pokeType2C.classList.add("pokeType2C");
-        if (data[i].type[1] === "") {
-            let pokeType2C = ""
-        } else {
-          pokeType2C.innerHTML = data[i].type[1];
+      //  types colors 
+      for (let J = 0; J<data[i]["type"].length; J++){
+          let color = typeColors[data[i]["type"][J].toLowerCase()]
+          let pokeType1C = document.createElement("button");
+          pokeType1C.classList.add(`pokeType1C`);
+          pokeType1C.setAttribute("id", `pokeType1C-"[i]"`);
+          pokeType1C.style.backgroundColor = color;
+          pokeType1C.innerHTML = data[i]["type"][J];
+          pokeType1Father.appendChild(pokeType1C);
       }
-
-      pokeType1Father.appendChild(pokeType1C);
-      pokeType1Father.appendChild(pokeType2C);
 
       leftContentC.appendChild(pokemonIdC);
       leftContentC.appendChild(pokemonImgC);
@@ -177,10 +196,15 @@ pokemonList(i);
        span.setAttribute("id",`span-${i}`);
        span.innerHTML = "X"
 
+       let pokemonLike = document.createElement("img");
+       pokemonLike.classList.add("pokemonLike");
+       pokemonLike.src = "./Vector.png";
+
 
       myContentC.appendChild(span); 
       myContentC.appendChild(leftContentC); 
-      myContentC.appendChild(rightContentC); 
+      myContentC.appendChild(rightContentC);
+      myContentC.appendChild(pokemonLike);  
       pokemonCardC.appendChild(myContentC); 
       allModal.appendChild(pokemonCardC); 
 
